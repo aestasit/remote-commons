@@ -17,6 +17,8 @@
 package com.aestasit.infrastructure.files
 
 import com.sun.javaws.exceptions.InvalidArgumentException
+import groovy.transform.CompileStatic
+import groovy.transform.TypeChecked
 
 import static com.aestasit.infrastructure.files.FileSetType.*
 
@@ -26,6 +28,8 @@ import static com.aestasit.infrastructure.files.FileSetType.*
  * @author Andrey Adamovich
  *
  */
+@CompileStatic
+@TypeChecked
 class FileSetBuilder {
 
   private FileSetType type = UNKNOWN
