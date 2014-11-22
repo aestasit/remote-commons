@@ -20,14 +20,18 @@ import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 
 /**
- * Slf4j-based logger.
+ * Remote event logging interface.
  *
  * @author Andrey Adamovich
  *
  */
 @CompileStatic
 @TypeChecked
-interface Logger {
+interface EventLogger {
+
+  // Connection events.
+  void connected(String host)
+  void disconnected(String host)
 
   // Command execution lifecycle messages.
   void commandOutput(String line)

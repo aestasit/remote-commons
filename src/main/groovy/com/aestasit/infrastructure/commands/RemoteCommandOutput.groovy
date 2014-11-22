@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 
-package com.aestasit.infrastructure.command
+package com.aestasit.infrastructure.commands
+
+import groovy.transform.Canonical
+import groovy.transform.CompileStatic
+import groovy.transform.TypeChecked
 
 /**
  * This class holds data for remote command execution result.
  *
  * @author Andrey Adamovich
  */
+@CompileStatic
+@TypeChecked
+@Canonical
 class RemoteCommandOutput {
 
   int exitStatus

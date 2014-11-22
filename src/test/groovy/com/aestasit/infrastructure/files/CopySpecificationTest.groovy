@@ -1,10 +1,10 @@
-package com.aestasit.groovy
+package com.aestasit.infrastructure.files
 
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 import org.junit.Test
 
-import static com.aestasit.infrastructure.files.CopySpecificationBuilder.copy
+import static com.aestasit.infrastructure.files.CopySpecification.copy
 
 @CompileStatic
 @TypeChecked

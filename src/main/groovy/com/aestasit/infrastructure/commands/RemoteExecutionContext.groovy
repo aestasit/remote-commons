@@ -1,4 +1,8 @@
 package com.aestasit.infrastructure.commands
 
-class RemoteExecutionContext {
+interface RemoteExecutionContext {
+
+  RemoteCommandOutput execute(String command)
+  RemoteCommandOutput execute(RemoteCommand command)
+
 }

@@ -18,91 +18,101 @@ package com.aestasit.infrastructure.logging
 
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
-import org.slf4j.LoggerFactory
 
 /**
- * Slf4j-based logger.
+ * Standard system output logger.
  *
  * @author Andrey Adamovich
  *
  */
 @CompileStatic
 @TypeChecked
-class Slf4jLogger implements Logger {
+class SysOutEventLogger implements EventLogger {
 
-  private final org.slf4j.Logger logger = LoggerFactory.getLogger(getClass().getPackage().getName())
+
+
+  @Override
+  void connected(String host) {
+
+  }
+
+  @Override
+  void disconnected(String host) {
+
+  }
 
   @Override
   void commandOutput(String line) {
-    logger.info(line)
+    println line
   }
 
   @Override
   void commandOutput(String[] lines) {
     lines.each { String line ->
-      logger.info(line)
+      commandOutput(line)
     }
   }
 
   @Override
   void commandErrorOutput(String line) {
-    logger.warn(line)
+    println "ERROR: ${line}"
   }
 
   @Override
   void commandErrorOutput(String[] lines) {
     lines.each { String line ->
-      logger.warn(line)
+      commandErrorOutput(line)
     }
   }
 
   @Override
-  void commandInput(String message) {
-    logger.info("${message}:")
+  void commandInput(String line) {
+    println "${line}:"
   }
 
   @Override
   void uploadStart(String local, String remote) {
-    logger.info("${local} -> ${remote}")
+    println "> Uploading: ${local} <- ${remote}"
   }
 
   @Override
   void uploadProgress(String local, String remote, int progress) {
-    // DO NOTHING.
+    print '.'
   }
 
   @Override
   void uploadEnd(String local, String remote) {
-    logger.info('Finished.')
+    println 'Done.'
   }
 
   @Override
   void downloadStart(String remote, String local) {
-    logger.info("${local} <- ${remote}")
+    println "> Downloading: ${local} -> ${remote}"
   }
 
   @Override
   void downloadProgress(String remote, String local, int progress) {
-    // DO NOTHING.
+    print '.'
   }
 
   @Override
   void downloadEnd(String remote, String local) {
-    logger.info('Finished.')
+    println 'Done.'
   }
 
   @Override
   void info(String message) {
-    logger.info(message)
+    println "$message"
   }
 
   @Override
   void warn(String message) {
-    logger.warn(message)
+    println "WARN: $message"
   }
 
   @Override
   void debug(String message) {
-    logger.debug(message)
+    println "DEBUG: $message"
   }
+
 }

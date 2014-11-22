@@ -30,7 +30,7 @@ import static com.aestasit.infrastructure.files.FileSetType.*
  */
 @CompileStatic
 @TypeChecked
-class FileSetBuilder {
+class FileSet {
 
   private FileSetType type = UNKNOWN
   private List<File> localDirs = new ArrayList<File>()

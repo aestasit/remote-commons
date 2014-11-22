@@ -1,4 +1,4 @@
-package com.aestasit.groovy
+package com.aestasit.infrastructure.files
 
 import com.aestasit.infrastructure.RemoteURL
 import groovy.transform.CompileStatic
