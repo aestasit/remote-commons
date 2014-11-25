@@ -16,6 +16,7 @@
 
 package com.aestasit.infrastructure.logging
 
+import com.aestasit.infrastructure.commands.RemoteCommand
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 
@@ -34,11 +35,14 @@ interface EventLogger {
   void disconnected(String host)
 
   // Command execution lifecycle messages.
+  void commandStart(RemoteCommand command)
   void commandOutput(String line)
   void commandOutput(String[] lines)
   void commandErrorOutput(String line)
   void commandErrorOutput(String[] lines)
   void commandInput(String message)
+  void commandTimeout(RemoteCommand command)
+  void commandFinish(RemoteCommand command)
 
   // File operation messages.
   void uploadStart(String local, String remote)
@@ -51,6 +55,7 @@ interface EventLogger {
   // Generic logging messages.
   void info(String message)
   void warn(String message)
+  void exception(String message, Throwable exception)
   void debug(String message)
 
 }

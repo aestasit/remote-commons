@@ -1,5 +1,6 @@
 package com.aestasit.infrastructure.logging
 
+import com.aestasit.infrastructure.commands.RemoteCommand
 import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
@@ -12,7 +13,7 @@ import groovy.transform.TypeChecked
  */
 @CompileStatic
 @TypeChecked
-class AnsiSysOutEventLogger implements EventLogger {
+class AnsiSysOutEventLogger extends BaseEventLogger {
 
   // TODO: implement
 
@@ -27,12 +28,12 @@ class AnsiSysOutEventLogger implements EventLogger {
   }
 
   @Override
-  void commandOutput(String line) {
+  void commandStart(RemoteCommand command) {
 
   }
 
   @Override
-  void commandOutput(String[] lines) {
+  void commandOutput(String line) {
 
   }
 
@@ -42,12 +43,17 @@ class AnsiSysOutEventLogger implements EventLogger {
   }
 
   @Override
-  void commandErrorOutput(String[] lines) {
+  void commandInput(String message) {
 
   }
 
   @Override
-  void commandInput(String message) {
+  void commandTimeout(RemoteCommand command) {
+
+  }
+
+  @Override
+  void commandFinish(RemoteCommand command) {
 
   }
 
@@ -88,6 +94,11 @@ class AnsiSysOutEventLogger implements EventLogger {
 
   @Override
   void warn(String message) {
+
+  }
+
+  @Override
+  void exception(String message, Throwable exception) {
 
   }
 

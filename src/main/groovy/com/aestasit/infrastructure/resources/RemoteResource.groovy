@@ -1,6 +1,6 @@
 package com.aestasit.infrastructure.resources
 
-class RemoteResource {
+abstract class RemoteResource {
 
   boolean exists() {
 

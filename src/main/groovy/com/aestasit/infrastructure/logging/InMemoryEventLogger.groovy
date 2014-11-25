@@ -1,5 +1,6 @@
 package com.aestasit.infrastructure.logging
 
+import com.aestasit.infrastructure.commands.RemoteCommand
 import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
@@ -21,7 +22,7 @@ class InMemoryEventLogger implements EventLogger {
     String message
   }
 
-  // TODO: change for concurrent implementation
+  // TODO: change for concurrent implementation. Queue?
   List<Event> messages = new ArrayList<Event>()
 
   private Event event(String eventType, String message) {
@@ -36,6 +37,11 @@ class InMemoryEventLogger implements EventLogger {
   @Override
   void disconnected(String host) {
     event('disconnected', host)
+  }
+
+  @Override
+  void commandStart(RemoteCommand command) {
+
   }
 
   @Override
@@ -65,6 +71,16 @@ class InMemoryEventLogger implements EventLogger {
   @Override
   void commandInput(String message) {
     event('commandInput', message)
+  }
+
+  @Override
+  void commandTimeout(RemoteCommand command) {
+
+  }
+
+  @Override
+  void commandFinish(RemoteCommand command) {
+
   }
 
   @Override
@@ -105,6 +121,11 @@ class InMemoryEventLogger implements EventLogger {
   @Override
   void warn(String message) {
     event('warn', message)
+  }
+
+  @Override
+  void exception(String message, Throwable exception) {
+
   }
 
   @Override

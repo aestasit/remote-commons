@@ -16,6 +16,7 @@
 
 package com.aestasit.infrastructure.logging
 
+import com.aestasit.infrastructure.commands.RemoteCommand
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 import org.slf4j.LoggerFactory
@@ -51,6 +52,11 @@ class Slf4jEventLogger implements EventLogger {
   }
 
   @Override
+  void commandStart(RemoteCommand command) {
+
+  }
+
+  @Override
   void commandOutput(String line) {
     logger.info(line)
   }
@@ -77,6 +83,16 @@ class Slf4jEventLogger implements EventLogger {
   @Override
   void commandInput(String message) {
     logger.info("${message}:")
+  }
+
+  @Override
+  void commandTimeout(RemoteCommand command) {
+
+  }
+
+  @Override
+  void commandFinish(RemoteCommand command) {
+
   }
 
   @Override
@@ -117,6 +133,11 @@ class Slf4jEventLogger implements EventLogger {
   @Override
   void warn(String message) {
     logger.warn(message)
+  }
+
+  @Override
+  void exception(String message, Throwable exception) {
+
   }
 
   @Override

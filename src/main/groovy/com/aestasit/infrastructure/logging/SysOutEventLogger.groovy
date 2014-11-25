@@ -16,6 +16,7 @@
 
 package com.aestasit.infrastructure.logging
 
+import com.aestasit.infrastructure.commands.RemoteCommand
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 
@@ -38,6 +39,11 @@ class SysOutEventLogger implements EventLogger {
 
   @Override
   void disconnected(String host) {
+
+  }
+
+  @Override
+  void commandStart(RemoteCommand command) {
 
   }
 
@@ -68,6 +74,16 @@ class SysOutEventLogger implements EventLogger {
   @Override
   void commandInput(String line) {
     println "${line}:"
+  }
+
+  @Override
+  void commandTimeout(RemoteCommand command) {
+
+  }
+
+  @Override
+  void commandFinish(RemoteCommand command) {
+
   }
 
   @Override
@@ -108,6 +124,11 @@ class SysOutEventLogger implements EventLogger {
   @Override
   void warn(String message) {
     println "WARN: $message"
+  }
+
+  @Override
+  void exception(String message, Throwable exception) {
+
   }
 
   @Override
