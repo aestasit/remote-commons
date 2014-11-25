@@ -16,7 +16,7 @@
 
 package com.aestasit.infrastructure.files
 
-import com.sun.javaws.exceptions.InvalidArgumentException
+import com.aestasit.infrastructure.exceptions.ConfigurationException
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 
@@ -84,7 +84,7 @@ class FileSet {
     if (this.type == UNKNOWN || this.type == type) {
       this.type = type
     } else {
-      throw new InvalidArgumentException("File set can not contain both local and remote source or target definitions!")
+      throw new ConfigurationException("File set can not contain both local and remote source or target definitions!")
     }
   }
 

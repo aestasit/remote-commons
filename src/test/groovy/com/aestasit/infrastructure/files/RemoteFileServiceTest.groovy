@@ -1,8 +1,6 @@
 package com.aestasit.infrastructure.files
 
 import com.aestasit.infrastructure.commands.NullExecutionContext
-import com.aestasit.infrastructure.files.LocalFileSystem
-import com.aestasit.infrastructure.files.RemoteFileService
 import com.aestasit.infrastructure.logging.SysOutEventLogger
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
@@ -22,18 +20,18 @@ class RemoteFileServiceTest {
 
   @Test
   void testFileDownloading() {
-    fileService.copy {
-      from {
-      }
-    }
+//    fileService.copy {
+//      from {
+//      }
+//    }
   }
 
   @Test
   void testFileUploading() {
-    fileService.copy {
-      from {
-      }
-    }
+//    fileService.copy {
+//      from {
+//      }
+//    }
   }
 
 }

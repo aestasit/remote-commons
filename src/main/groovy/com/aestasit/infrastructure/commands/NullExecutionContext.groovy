@@ -12,4 +12,18 @@ class NullExecutionContext implements RemoteExecutionContext {
     new RemoteCommandOutput(0, "")
   }
 
+  @Override
+  RemoteCommandOutput execute(RemoteCommand command) {
+    return null
+  }
+
+  @Override
+  RemoteCommandOutput execute(Closure cl) {
+    return null
+  }
+
+  @Override
+  RemoteCommandOutput execute(RemoteCommand command, RemoteCommand rollbackCommand) {
+    return null
+  }
 }

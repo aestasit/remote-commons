@@ -25,7 +25,7 @@ class InMemoryEventLogger implements EventLogger {
   // TODO: change for concurrent implementation. Queue?
   List<Event> messages = new ArrayList<Event>()
 
-  private Event event(String eventType, String message) {
+  private void event(String eventType, String message) {
     messages.add(new Event(eventType: eventType, message: message))
   }
 
