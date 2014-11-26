@@ -49,6 +49,56 @@ class RemoteFileService {
     }
   }
 
+  RemoteFile remoteFile(String destination) {
+    new RemoteFile(destination, fileSystem)
+  }
+
+  RemoteFile remoteDir(String destination) {
+    new RemoteFile(destination, fileSystem)
+  }
+
+  boolean mkdir(String destination) {
+    // TODO: improve error handling
+    exec "mkdir -p ${destination}"
+  }
+
+  boolean remkdir(String destination) {
+    delete(destination)
+    mkdir(destination)
+  }
+
+  // TODO: Allow setting parameters (permissions, owner etc.) for remote directory creation through closure.
+  // boolean mkdir(Closure cl) {
+  //
+  // }
+  //
+  // boolean remkdir(Closure cl) {
+  //
+  // }
+
+  boolean delete(String destination) {
+    // TODO: improve error handling
+    exec "rm -rf ${destination}"
+  }
+
+  boolean touch(String destination) {
+    // TODO: improve error handling
+    exec "touch ${destination}"
+  }
+
+  // TODO: Allow remote file manipulation through closure.
+  // RemoteFile remoteFile(String destination, Closure cl) {
+  //
+  // }
+  //
+  // RemoteFile remoteDir(String destination, Closure cl) {
+  //
+  // }
+
+  ///////////////////////////////////////////////////////////
+  // PRIVATE METHODS
+  ///////////////////////////////////////////////////////////
+
   static private void validateCopySpecification(CopySpecification specification) {
     if (specification.source.type == null || specification.source.type == UNKNOWN ||
         specification.target.type == null || specification.target.type == UNKNOWN) {
