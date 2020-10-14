@@ -1,48 +1,56 @@
+/*
+ * Copyright (C) 2011-2020 Aestas/IT
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 plugins {
-
-  id 'groovy'
-  id 'maven'
-  id 'eclipse'
-  id 'idea'
-  id 'project-report'
-
-  id "net.saliman.cobertura" version "2.2.5"
-  id "com.github.hierynomus.license" version "0.11.0"
-  id "org.ajoberstar.github-pages" version "0.10.0"
-  id "org.asciidoctor.gradle.asciidoctor" version "1.5.0"
-
+    id 'java-library'
+    id 'groovy'
+    id 'idea'
+    id 'org.ajoberstar.git-publish'
 }
 
-group = 'com.aestasit.infrastructure.commons'
-version = '0.1-SNAPSHOT'
-
-apply from: 'repos.gradle'
-apply from: 'sonar.gradle'
-apply from: 'docs.gradle'
+config {
+  info {
+    name          = 'Remote Commons'
+    description   = 'Groovy library that holds base abstractions for implementing remote server connectivity.'
+    inceptionYear = '2011'
+    tags          = ['remote server']
+  }
+}
 
 dependencies {
-  compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
-  compile "org.slf4j:slf4j-api:${slf4jVersion}"
-  compile "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
-  compile "ch.qos.logback:logback-core:${logbackVersion}"
-  compile "ch.qos.logback:logback-classic:${logbackVersion}"
-  compile "commons-io:commons-io:${commonsIOVersion}"
-  compile "commons-codec:commons-codec:${commonsCodecVersion}"
-  compile "org.fusesource.jansi:jansi:${jansiVersion}"
-  testCompile "junit:junit:${junitVersion}"
+  api "org.codehaus.groovy:groovy:${groovyVersion}"
+  api "org.slf4j:slf4j-api:${slf4jVersion}"
+  api "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+  api "ch.qos.logback:logback-core:${logbackVersion}"
+  api "ch.qos.logback:logback-classic:${logbackVersion}"
+  api "commons-io:commons-io:${commonsIOVersion}"
+  api "commons-codec:commons-codec:${commonsCodecVersion}"
+  api "org.fusesource.jansi:jansi:${jansiVersion}"
+  testImplementation "junit:junit:${junitVersion}"
+  testImplementation "org.codehaus.groovy:groovy-test:${groovyVersion}"
 }
 
-configurations {
-  all*.exclude group: 'commons-logging'
-  all*.exclude group: 'log4j'
-  all*.exclude module: 'slf4j-simple'
+gitPublish {
+    repoUri = rootProject.extensions.findByName('config').info.links.scm
+    branch = 'gh-pages'
+    contents {
+        from(groovydoc.outputs.files) {
+            into 'docs/groovydoc'
+        }
+    }
 }
 
-task wrapper(type: Wrapper) {
-  gradleVersion = '2.1'
-}
-
-license {
-  header rootProject.file('HEADER')
-}
+gitPublishCommit.dependsOn(groovydoc)
